@@ -1,0 +1,15 @@
+<div class="dimensions bordered">
+
+    <div class="top">
+        <input class="widget" type="text" [(ngModel)]="_rollName">
+        <mat-icon class="material-symbols-outlined pointer" (click)="deleteRoll()">delete</mat-icon>
+    </div>
+
+    <input class="widget" id="rollStringInput" type="text" [(ngModel)]="_rollData">
+
+    <div class="bottom">
+        <mat-icon class="material-symbols-outlined pointer" (click)="confirmChanges()">done</mat-icon>
+        <mat-icon class="material-symbols-outlined pointer" (click)="cancelChanges()">close</mat-icon>
+    </div>
+
+</div>

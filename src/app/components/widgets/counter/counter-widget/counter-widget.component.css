@@ -1,0 +1,36 @@
+
+.dimensions{
+    width: 90px;
+}
+
+.bordered{
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 10px;
+    background-color: white;
+}
+
+.display{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.name{
+    width: 90%;
+    border-bottom: 2px solid rgb(118, 118, 118);
+}
+
+.total{
+    font-size: x-large;
+}
+
+.controls{
+    display: flex;
+    flex-direction: column;
+}
+
+input[type=range]{
+    width: 90%;
+    
+}

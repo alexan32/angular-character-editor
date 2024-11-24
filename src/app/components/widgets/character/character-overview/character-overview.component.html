@@ -1,0 +1,96 @@
+<div>
+    <h2>Character Overview</h2>
+
+    <app-expandable
+        [title]="'Counter'"
+        [template]="counterTable">
+    </app-expandable>
+    
+    <app-expandable
+        [title]="'Composites'"
+        [template]="compositeTable">
+    </app-expandable>
+    
+    <app-expandable
+        [title]="'Rolls'"
+        [template]="rollTable">
+    </app-expandable>
+</div>
+
+<!--------------------------------------------------------------------->
+
+<ng-template #counterTable>
+    <input type="text" class="widget" placeholder="search..." [(ngModel)]="counterSearch" (ngModelChange)="filter(counterSearch, 'counters');">
+    <div class="tableFixHead">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Min</th>
+                    <th>Max</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr 
+                *ngFor="let counter of filteredTableData.counters; let i = index;" 
+                (click)="editRow('counter', counter);"
+                class="pointer">
+                    <td>{{counter.name}}</td>
+                    <td>{{counter.min}}</td>
+                    <td>{{counter.max}}</td>
+                    <td>{{counter.total}}</td>
+                </tr>
+            </tbody>
+    
+        </table>
+    </div>
+
+</ng-template>
+
+<ng-template #compositeTable>
+    <input type="text" class="widget" placeholder="search..." [(ngModel)]="compositeSearch" (ngModelChange)="filter(compositeSearch, 'composites');">
+    <div class="tableFixHead">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Roll</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let composite of filteredTableData.composites"
+                (click)="editRow('composite', composite);"
+                class="pointer"
+                >
+                    <td>{{composite.name}}</td>
+                    <td>{{composite.roll}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ng-template>
+
+<ng-template #rollTable>
+    <input type="text" class="widget" placeholder="search..." [(ngModel)]="rollSearch" (ngModelChange)="filter(rollSearch, 'rolls');">
+    
+    <div class="tableFixHead">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Roll</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let roll of filteredTableData.rolls"
+                (click)="editRow('roll', roll);"
+                class="pointer"    
+                >
+                    <td>{{roll.name}}</td>
+                    <td>{{roll.roll}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ng-template>

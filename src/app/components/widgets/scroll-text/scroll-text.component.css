@@ -1,0 +1,16 @@
+*{
+    text-align: center;
+}
+
+.outer{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.inner{
+    height: 100%;
+    white-space: nowrap;
+    display: inline-block;
+}

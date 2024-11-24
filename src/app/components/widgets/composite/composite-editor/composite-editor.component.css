@@ -1,0 +1,42 @@
+input[type=text]{
+    width: 100px;
+}
+
+input[type=text].title{
+    width: 180px;
+}
+
+.dimensions{
+    width: 250px;
+    padding: 10px;
+}
+
+.bordered{
+    border: 1px solid black;
+    border-radius: 3px;
+    background-color: white;
+}
+
+.fill-width{
+    width: 100%;
+}
+
+.flex-center{
+    display: flex;
+    justify-content: center;
+}
+
+.flex-space-between{
+    display: flex;
+    justify-content: space-between;
+}
+
+.float-right{
+    float: right;
+}
+
+.scroll-box{
+    height: 150px;
+    width: 104%;
+    overflow-y: scroll;
+}

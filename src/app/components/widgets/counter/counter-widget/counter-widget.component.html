@@ -1,0 +1,19 @@
+<div class="dimensions bordered">
+    <div class="name">
+        <app-scroll-text
+            [text]="counterName">
+        </app-scroll-text>
+    </div>
+    <div class="display">
+        <span>
+            <span class="total">{{counterData.total}}</span>
+            <span>/{{counterData.max}}</span>
+        </span>
+        
+        <span class="controls">
+            <mat-icon class="material-symbols-outlined pointer noselect" (click)="increment();">expand_less</mat-icon>
+            <mat-icon class="material-symbols-outlined pointer noselect" (click)="decrement();">expand_more</mat-icon>
+        </span>
+    </div>
+    <input class="widget" type="range" [max]="counterData.max" [min]="counterData.min" [(ngModel)]="counterData.total" (ngModelChange)="emit();">
+</div>

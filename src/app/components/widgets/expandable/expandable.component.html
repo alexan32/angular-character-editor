@@ -1,0 +1,13 @@
+<div class="wrapper">
+
+    <div class="top">
+        <mat-icon *ngIf="showContent" class="material-symbols-outlined pointer" (click)="showContent = false;">expand_less</mat-icon>
+        <mat-icon *ngIf="!showContent" class="material-symbols-outlined pointer" (click)="showContent = true;">expand_more</mat-icon>
+        <h4>{{title}}</h4>
+    </div>
+
+    <div class="body" *ngIf="showContent">
+        <ng-container *ngTemplateOutlet="template"></ng-container>
+    </div>
+    
+</div>

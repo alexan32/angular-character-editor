@@ -1,0 +1,21 @@
+<div class="dimensions bordered">
+
+
+    <div class="flex-space-between">
+        <span class="flex-center fill-width">
+            <input class="widget" type="text" [(ngModel)]="_articleName">
+        </span>
+        <mat-icon class="material-symbols-outlined pointer float-right" (click)="deleteArticle()">delete</mat-icon>
+    </div>
+
+    <div class="flex-center">
+        <textarea id="articleStringInput" class="custom-scroll" type="text" [(ngModel)]="_articleData"></textarea>
+    </div>
+    
+
+    <div class="flex-center">
+        <mat-icon class="material-symbols-outlined pointer" (click)="confirmChanges()">done</mat-icon>
+        <mat-icon class="material-symbols-outlined pointer" (click)="cancelChanges()">close</mat-icon>
+    </div>
+
+</div>

@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-
+import { CharacterEditorComponent } from './components/character-editor/character-editor.component';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [
+    CharacterEditorComponent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

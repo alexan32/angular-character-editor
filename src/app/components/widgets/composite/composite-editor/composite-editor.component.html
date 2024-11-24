@@ -1,0 +1,30 @@
+<div class="dimensions bordered">
+
+    <div class="flex-space-between">
+        <span class="flex-center fill-width">
+            <input type="text" class="title widget" [(ngModel)]="_compositeName">
+        </span>
+        <mat-icon class="material-symbols-outlined pointer float-right" (click)="deleteComposite();">delete</mat-icon>
+    </div>
+
+    <div class="scroll-box custom-scroll">
+        <table class="fill-width">
+            <tr *ngFor="let data of _rows; index as i;" (mouseover)="mouseIndex=i" (mouseleave)="mouseIndex=-1;">
+                <td><input class="key-input widget" type="text" [(ngModel)]="_rows[i].key"></td>
+                <td><input class="widget" type="text" [(ngModel)]="_rows[i].data"></td>
+                <td><mat-icon class="material-symbols-outlined pointer" [ngStyle]="mouseIndex==i ? {'visibility': 'visible'} : {'visibility': 'hidden'}" (click)="deleteRow(mouseIndex);">delete</mat-icon></td>
+            </tr>
+            <tr>
+                <td class="flex-center">
+                    <mat-icon class="material-symbols-outlined pointer" (click)="addRow()">add</mat-icon>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="flex-center">
+        <mat-icon class="material-symbols-outlined pointer" (click)="confirmChanges();">done</mat-icon>
+        <mat-icon class="material-symbols-outlined pointer" (click)="cancelChanges();">close</mat-icon>
+    </div>
+
+</div>

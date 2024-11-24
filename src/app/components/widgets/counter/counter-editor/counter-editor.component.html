@@ -1,0 +1,28 @@
+<div class="dimensions bordered">
+
+    <div class="top">
+        <input class="widget" type="text" [(ngModel)]="_counterName">
+        <mat-icon class="material-symbols-outlined pointer" (click)="deleteCounter()">delete</mat-icon>
+    </div>
+
+    <table>
+        <tr>
+            <td class="label">Maximum</td>
+            <td><input class="widget" type="number" [(ngModel)]="_counterData.max" (change)="updateValues()"></td>
+        </tr>
+        <tr>
+            <td class="label">Minimum</td>
+            <td><input class="widget" type="number" [(ngModel)]="_counterData.min" (change)="updateValues()"></td>
+        </tr>
+        <tr>
+            <td class="label">Total</td>
+            <td><input class="widget" type="number" [(ngModel)]="_counterData.total" (change)="updateValues()"></td>
+        </tr>
+    </table>
+
+    <div class="bottom">
+        <mat-icon class="material-symbols-outlined pointer" (click)="confirmChanges()">done</mat-icon>
+        <mat-icon class="material-symbols-outlined pointer" (click)="cancelChanges()">close</mat-icon>
+    </div>
+
+</div>

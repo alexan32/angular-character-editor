@@ -1,0 +1,35 @@
+.dimensions{
+    width: 400px;
+}
+
+.bordered{
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 10px;
+    background-color: white;
+}
+
+.fill-width{
+    width: 100%;
+}
+
+.flex-space-between{
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-center{
+    display: flex;
+    justify-content: center;
+}
+
+input[type=text]{
+    width: 220px;
+    margin-bottom: 10px;
+}
+
+textarea{
+    width: 98%;
+    min-height: 100px;
+    resize: vertical;
+}

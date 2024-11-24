@@ -1,0 +1,10 @@
+
+<div class="top">
+    <mat-icon 
+        class="material-symbols-outlined pointer" 
+        (click)="showInfo = !showInfo;"
+        [ngStyle]="showInfo ? {'transform': 'rotate(0)'} : {'transform': 'rotate(270deg)'}"
+    >expand_more</mat-icon>
+    <h4>{{articleName}}</h4>
+</div>
+<p *ngIf="showInfo">{{articleData}}</p>

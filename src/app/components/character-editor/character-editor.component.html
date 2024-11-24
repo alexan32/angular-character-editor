@@ -1,0 +1,73 @@
+<div class="dimensions">
+
+    <div class="editor">
+
+        <mat-tab-group [(selectedIndex)]="matTabIndex" mat-stretch-tabs="false" mat-align-tabs="start">
+
+            <!-- DATA EDITOR TAB -->
+            <mat-tab label="Counters and Rolls">
+
+                <div *ngIf="!showCompositeEditor && !showRollEditor && !showCounterEditor" class="button-row">
+                    <button mat-raised-button color="primary" (click)="newComposite()">Add Composite</button>
+                    <button *ngIf="!showCounterEditor;" mat-raised-button color="primary" (click)="newCounter()">Add Counter</button>
+                    <button mat-raised-button color="primary" (click)="newRoll()">Add Roll</button>
+                </div>
+        
+                <ng-container *ngIf="showCounterEditor;">
+                    <h4>Counter Editor</h4>
+                    <app-counter-editor 
+                        [counterName]="counterName"
+                        [counterData]="counterData"
+                        (dataChange)="counterEditorEvent($event)">
+                    </app-counter-editor>
+                </ng-container>
+                
+                <ng-container *ngIf="showRollEditor">
+                    <h4>Roll Editor</h4>
+                    <app-roll-editor 
+                        [rollName]="rollName"
+                        [rollData]="rollData"
+                        (dataChange)="rollEditorEvent($event)">
+                    </app-roll-editor>
+                </ng-container>
+        
+                <ng-container  *ngIf="showCompositeEditor">
+                    <h4>Composite Editor</h4>
+                    <app-composite-editor
+                        [compositeName]="compositeName"
+                        [compositeData]="compositeData"
+                        (dataChange)="compositeEditorEvent($event)">
+                    </app-composite-editor>
+                </ng-container>
+            </mat-tab>
+
+            <!-- <mat-tab label="Functions"></mat-tab>
+            <mat-tab label="Articles"></mat-tab>
+            <mat-tab label="Tables"></mat-tab> -->
+            <mat-tab label="Review">
+                <table>
+                    <tr>
+                        <td>First Name:</td>
+                        <td><input type="text" [(ngModel)]="characterHandler.characterData.firstName"></td>
+                    </tr>
+                    <tr>
+                        <td>Last Name:</td>
+                        <td><input type="text" [(ngModel)]="characterHandler.characterData.lastName"></td>
+                    </tr>
+                </table>
+                <p *ngIf="!validateFirstName()">First name is required and must be unique.</p>
+                <button mat-raised-button color="primary" (click)="saveCharacter()">Save Character</button>
+            </mat-tab>
+            
+        </mat-tab-group>
+
+    </div>
+
+    <div>
+        <app-character-overview
+            [characterData]="_characterData"
+            (rowSelect)="editValue($event)"
+        ></app-character-overview>
+    </div>
+
+</div>
