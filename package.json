@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --base-href \"https://alexan32.github.io/angular-character-editor/\"",
+    "deploy": "npx angular-cli-ghpages --dir=dist/character-editor",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
