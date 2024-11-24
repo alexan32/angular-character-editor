@@ -2,14 +2,14 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
-import { TableComponent } from '../widgets/table/table.component';
+// import { TableComponent } from '../widgets/table/table.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CounterEditorComponent } from '../widgets/counter/counter-editor/counter-editor.component';
 import { CharacterDataHandler } from '../../models/characterTemplates';
 import { RollEditorComponent } from '../widgets/roll-editor/roll-editor.component';
 import { CompositeEditorComponent } from '../widgets/composite/composite-editor/composite-editor.component';
 import { CharacterOverviewComponent } from '../widgets/character/character-overview/character-overview.component';
-import { characterMin } from '../../models/characterTemplates';
+import { characterMin, dnd5e } from '../../models/characterTemplates';
 @Component({
   selector: 'app-character-editor',
   standalone: true,
@@ -17,7 +17,7 @@ import { characterMin } from '../../models/characterTemplates';
     CommonModule,
     MatButtonModule,
     FormsModule,
-    TableComponent,
+    // TableComponent,
     MatTabsModule,
     CounterEditorComponent,
     RollEditorComponent,
@@ -30,6 +30,7 @@ import { characterMin } from '../../models/characterTemplates';
 export class CharacterEditorComponent {
 
   // characterData
+  templateSelected:boolean = false;
   characterHandler: CharacterDataHandler;
   _characterData: any = characterMin;
   tableData: any = {
@@ -64,9 +65,55 @@ export class CharacterEditorComponent {
   compositeData: any = {};
 
   matTabIndex: number | null = 0;
+  
+  //
 
   constructor(){
     this.characterHandler = new CharacterDataHandler(this._characterData);
+  }
+
+  // TEMPLATE MANAGEMENT ==========================================
+
+  loadFromFile(){
+    var input:HTMLElement | null = document.getElementById('fileInput');
+    if(input){
+      input.addEventListener('change', (event:any)=>{
+        const file = event.target.files[0];
+        console.log(file);
+        const reader = new FileReader();
+        reader.onload = (e:any)=>{
+          try{
+            const jsonObject = JSON.parse(e.target.result);
+            this.resetCharacterData(jsonObject);
+          }catch(error){
+            alert("Failed to process the file that you selected. Please make sure you uploaded the correct file.")
+          }
+        }
+        reader.readAsText(file);
+      })
+      input.click();
+    }
+  }
+
+  loadTemplate(template:string){
+    if(template == "5e"){
+      this.resetCharacterData(dnd5e)
+    }else if(template == "characterMin"){
+      this.resetCharacterData(characterMin)
+    }
+  }
+
+  resetCharacterData(characterData:any){
+    if(this.templateSelected){
+      if (confirm("You have a character in progress. Do you wish to proceed? Doing so will undo your current progress.")){
+        this.characterHandler.characterData = characterData;
+        this.refreshCharacterOverview();
+      }
+    }else{
+      this.characterHandler.characterData = characterData;
+      this.refreshCharacterOverview();
+    }
+    this.templateSelected = true;
   }
 
   // EDITOR EVENT HANDLING ========================================
@@ -193,7 +240,7 @@ export class CharacterEditorComponent {
   editValue(event:any){
     console.log(event);
     this.resetEditors();
-    this.matTabIndex = 0;
+    this.matTabIndex = 1;
     switch(event.type){
       case "roll":
         this.rollName = event.value.name;
@@ -243,8 +290,17 @@ export class CharacterEditorComponent {
     return true;
   }
 
-  saveCharacter(){
+  downloadCharacter(){
     // this.characterService.saveCharacter(this.characterHandler.characterData);
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.characterHandler.characterData, null, 2));
+    const downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href", dataStr);
+    const first = this.characterHandler.characterData.first;
+    const last = this.characterHandler.characterData.last;
+    downloadAnchorNode.setAttribute("download", `${first}-${last}` + ".json");
+    document.body.appendChild(downloadAnchorNode); // Required for Firefox
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove(); // Remove the element after download
   }
 
 }

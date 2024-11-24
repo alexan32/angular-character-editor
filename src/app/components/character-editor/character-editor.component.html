@@ -4,8 +4,18 @@
 
         <mat-tab-group [(selectedIndex)]="matTabIndex" mat-stretch-tabs="false" mat-align-tabs="start">
 
+            <mat-tab label="Choose Template">
+                
+                <div class="column">
+                    <button mat-raised-button color="primary" (click)="loadFromFile()">Load From File</button>
+                    <button mat-raised-button color="primary" (click)="loadTemplate('5e')">Dnd 5e Template</button>
+                    <button mat-raised-button color="primary" (click)="loadTemplate('characterMin')">Blank Template</button>
+                </div>
+
+            </mat-tab>
+
             <!-- DATA EDITOR TAB -->
-            <mat-tab label="Counters and Rolls">
+            <mat-tab label="Counters and Rolls" [disabled]="!templateSelected">
 
                 <div *ngIf="!showCompositeEditor && !showRollEditor && !showCounterEditor" class="button-row">
                     <button mat-raised-button color="primary" (click)="newComposite()">Add Composite</button>
@@ -44,19 +54,19 @@
             <!-- <mat-tab label="Functions"></mat-tab>
             <mat-tab label="Articles"></mat-tab>
             <mat-tab label="Tables"></mat-tab> -->
-            <mat-tab label="Review">
+            <mat-tab label="Review" [disabled]="!templateSelected">
                 <table>
                     <tr>
                         <td>First Name:</td>
-                        <td><input type="text" [(ngModel)]="characterHandler.characterData.firstName"></td>
+                        <td><input type="text" [(ngModel)]="characterHandler.characterData.first"></td>
                     </tr>
                     <tr>
                         <td>Last Name:</td>
-                        <td><input type="text" [(ngModel)]="characterHandler.characterData.lastName"></td>
+                        <td><input type="text" [(ngModel)]="characterHandler.characterData.last"></td>
                     </tr>
                 </table>
                 <p *ngIf="!validateFirstName()">First name is required and must be unique.</p>
-                <button mat-raised-button color="primary" (click)="saveCharacter()">Save Character</button>
+                <button mat-raised-button color="primary" (click)="downloadCharacter()">Download Character</button>
             </mat-tab>
             
         </mat-tab-group>
@@ -71,3 +81,4 @@
     </div>
 
 </div>
+<input type="file" id="fileInput"/>

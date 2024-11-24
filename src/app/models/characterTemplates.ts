@@ -1,9 +1,7 @@
 export const characterMin = {
-    "userId": null,             // email
-    "characterId": null,        // uuid
-    "participant": "not_set",        // discord id
-    "firstName": null,
-    "lastName": "",
+    "discordId": null,
+    "first": "",
+    "last": "",
     "meta": {},
     "functions": {},
     "articles": {},
@@ -13,11 +11,9 @@ export const characterMin = {
 }
 
 export const dnd5e = {
-    "userId": null,             // email
-    "characterId": null,        // uuid
-    "participant": "not_set",        // discord id
-    "firstName": null,
-    "lastName": "",
+    "discordId": null,
+    "first": "",
+    "last": "",
     "meta": {},
     "functions": {
         "longrest": "|counter hp max; counter temphp min;",

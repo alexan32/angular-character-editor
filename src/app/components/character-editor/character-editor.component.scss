@@ -13,3 +13,22 @@
     margin-top: 10px;
     height: 100px;
 }
+
+.column{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.column button{
+    width: 300px;
+}
+
+button{
+    padding: 10px;
+    margin: 10px;
+}
+
+#fileInput{
+    visibility: hidden;
+}
