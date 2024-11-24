@@ -1,17 +1,22 @@
 <div>
-    <h2>Character Overview</h2>
+    <h2>Character Overview 
+        <mat-icon matTooltip="Click on a row to edit">info</mat-icon>
+    </h2>
 
     <app-expandable
+        [showContent]="true"
         [title]="'Counter'"
         [template]="counterTable">
     </app-expandable>
     
     <app-expandable
+        [showContent]="true"
         [title]="'Composites'"
         [template]="compositeTable">
     </app-expandable>
     
     <app-expandable
+        [showContent]="true"
         [title]="'Rolls'"
         [template]="rollTable">
     </app-expandable>

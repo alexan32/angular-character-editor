@@ -4,10 +4,17 @@ import { FormsModule } from '@angular/forms';
 import { characterToTableData } from '../../../../utils';
 import { MatIconModule } from '@angular/material/icon';
 import { ExpandableComponent } from '../../expandable/expandable.component';
+import { MatTooltip } from '@angular/material/tooltip';
 @Component({
   selector: 'app-character-overview',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule, ExpandableComponent],
+  imports: [
+    CommonModule, 
+    FormsModule, 
+    MatIconModule, 
+    ExpandableComponent,
+    MatTooltip
+  ],
   templateUrl: './character-overview.component.html',
   styleUrl: './character-overview.component.css'
 })

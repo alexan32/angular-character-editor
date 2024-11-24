@@ -10,6 +10,8 @@ import { RollEditorComponent } from '../widgets/roll-editor/roll-editor.componen
 import { CompositeEditorComponent } from '../widgets/composite/composite-editor/composite-editor.component';
 import { CharacterOverviewComponent } from '../widgets/character/character-overview/character-overview.component';
 import { characterMin, dnd5e } from '../../models/characterTemplates';
+import { MatTooltip, TooltipPosition} from '@angular/material/tooltip';
+
 @Component({
   selector: 'app-character-editor',
   standalone: true,
@@ -22,7 +24,8 @@ import { characterMin, dnd5e } from '../../models/characterTemplates';
     CounterEditorComponent,
     RollEditorComponent,
     CompositeEditorComponent,
-    CharacterOverviewComponent
+    CharacterOverviewComponent,
+    MatTooltip
   ],
   templateUrl: './character-editor.component.html',
   styleUrl: './character-editor.component.scss'
@@ -114,6 +117,7 @@ export class CharacterEditorComponent {
       this.refreshCharacterOverview();
     }
     this.templateSelected = true;
+    this.matTabIndex = 1;
   }
 
   // EDITOR EVENT HANDLING ========================================

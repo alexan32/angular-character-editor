@@ -7,7 +7,7 @@
             <mat-tab label="Choose Template">
                 
                 <div class="column">
-                    <button mat-raised-button color="primary" (click)="loadFromFile()">Load From File</button>
+                    <button mat-raised-button color="primary" (click)="loadFromFile()" matTooltip="Upload a pre-existing character" matTooltipPosition="right">Load From File</button>
                     <button mat-raised-button color="primary" (click)="loadTemplate('5e')">Dnd 5e Template</button>
                     <button mat-raised-button color="primary" (click)="loadTemplate('characterMin')">Blank Template</button>
                 </div>
