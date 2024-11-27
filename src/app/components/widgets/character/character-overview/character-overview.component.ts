@@ -1,10 +1,12 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { characterToTableData } from '../../../../utils';
 import { MatIconModule } from '@angular/material/icon';
 import { ExpandableComponent } from '../../expandable/expandable.component';
 import { MatTooltip } from '@angular/material/tooltip';
+import { CharacterService } from '../../../../services/character.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-character-overview',
   standalone: true,
@@ -19,7 +21,7 @@ import { MatTooltip } from '@angular/material/tooltip';
   styleUrl: './character-overview.component.css'
 })
 
-export class CharacterOverviewComponent {
+export class CharacterOverviewComponent implements OnInit, OnDestroy{
 
   tableData: any = {
     counters: [],
@@ -37,20 +39,31 @@ export class CharacterOverviewComponent {
   compositeIndex: number = -1;
   rollIndex: number = -1;
 
-  _characterData: any = {};
+  @Output() rowSelect:EventEmitter<any> = new EventEmitter();
 
-  @Input() set characterData(data:any){
-    this.tableData = characterToTableData(data);
-    this.filteredTableData = JSON.parse(JSON.stringify(this.tableData));
-    this._characterData = data;
-    console.info("character-overview component refreshed character data");
-    
-    this.filter(this.rollSearch, "rolls");
-    this.filter(this.counterSearch, "counters");
-    this.filter(this.compositeSearch, "composites");
+  characterDataSubscription:Subscription;
+  characterData:any;
+
+  constructor(private characterService:CharacterService){}
+
+  ngOnInit(): void {
+    this.characterDataSubscription = this.characterService.getCharacterObservable().subscribe((value:any)=>{
+      this.characterData = value;
+      this.tableData = characterToTableData(this.characterData);
+      this.filteredTableData = JSON.parse(JSON.stringify(this.tableData));
+      console.info("character-overview component refreshed character data");
+      
+      this.filter(this.rollSearch, "rolls");
+      this.filter(this.counterSearch, "counters");
+      this.filter(this.compositeSearch, "composites");
+    })
   }
 
-  @Output() rowSelect:EventEmitter<any> = new EventEmitter();
+  ngOnDestroy(): void {
+    if(this.characterDataSubscription){
+      this.characterDataSubscription.unsubscribe();
+    }
+  }
 
   filter(searchString:string, dataKey:string){
     let data = this.tableData[dataKey];

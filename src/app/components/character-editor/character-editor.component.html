@@ -17,7 +17,9 @@
             <!-- DATA EDITOR TAB -->
             <mat-tab label="Edit Rolls" [disabled]="!templateSelected">
 
-                <div *ngIf="!showCompositeEditor && !showRollEditor && !showCounterEditor && !showFifthEditionEditor" class="button-row">
+                <app-editor-tab></app-editor-tab>
+
+                <!-- <div *ngIf="!showCompositeEditor && !showRollEditor && !showCounterEditor && !showFifthEditionEditor" class="button-row">
                     <button mat-raised-button color="primary" (click)="newComposite()">Add Composite</button>
                     <button mat-raised-button color="primary" (click)="newCounter()">Add Counter</button>
                     <button mat-raised-button color="primary" (click)="newRoll()">Add Roll</button>
@@ -53,23 +55,20 @@
 
                 <ng-container *ngIf="showFifthEditionEditor">
                     <app-fifth-edition-editor></app-fifth-edition-editor>
-                </ng-container>
+                </ng-container> -->
 
             </mat-tab>
 
-            <!-- <mat-tab label="Functions"></mat-tab>
-            <mat-tab label="Articles"></mat-tab>
-            <mat-tab label="Tables"></mat-tab> -->
             <mat-tab label="Review" [disabled]="!templateSelected">
                 <table>
-                    <tr>
+                    <!-- <tr>
                         <td>First Name:</td>
                         <td><input type="text" [(ngModel)]="characterHandler.characterData.first"></td>
                     </tr>
                     <tr>
                         <td>Last Name:</td>
                         <td><input type="text" [(ngModel)]="characterHandler.characterData.last"></td>
-                    </tr>
+                    </tr> -->
                 </table>
                 <p *ngIf="!validateFirstName()">First name is required and must be unique.</p>
                 <button mat-raised-button color="primary" (click)="downloadCharacter()">Download Character</button>
@@ -81,7 +80,6 @@
 
     <div>
         <app-character-overview
-            [characterData]="_characterData"
             (rowSelect)="editValue($event)"
         ></app-character-overview>
     </div>

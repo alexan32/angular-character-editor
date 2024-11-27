@@ -1,0 +1,37 @@
+<div *ngIf="!showCompositeEditor && !showRollEditor && !showCounterEditor && !showFifthEditionEditor" class="button-row">
+    <button mat-raised-button color="primary" (click)="newComposite()">Add Composite</button>
+    <button mat-raised-button color="primary" (click)="newCounter()">Add Counter</button>
+    <button mat-raised-button color="primary" (click)="newRoll()">Add Roll</button>
+    <!-- <button *ngIf="templateName == '5e'" mat-raised-button color="primary" (click)="selectFifthEditionEditor()">5e Editor</button> -->
+</div>
+
+<ng-container *ngIf="showCounterEditor;">
+    <h4>Counter Editor</h4>
+    <app-counter-editor 
+        [counterName]="counterName"
+        [counterData]="counterData"
+        (dataChange)="counterEditorEvent($event)">
+    </app-counter-editor>
+</ng-container>
+
+<ng-container *ngIf="showRollEditor">
+    <h4>Roll Editor</h4>
+    <app-roll-editor 
+        [rollName]="rollName"
+        [rollData]="rollData"
+        (dataChange)="rollEditorEvent($event)">
+    </app-roll-editor>
+</ng-container>
+
+<ng-container  *ngIf="showCompositeEditor">
+    <h4>Composite Editor</h4>
+    <app-composite-editor
+        [compositeName]="compositeName"
+        [compositeData]="compositeData"
+        (dataChange)="compositeEditorEvent($event)">
+    </app-composite-editor>
+</ng-container>
+
+<!-- <ng-container *ngIf="showFifthEditionEditor">
+    <app-fifth-edition-editor></app-fifth-edition-editor>
+</ng-container> -->

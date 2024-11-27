@@ -303,49 +303,49 @@ export const dnd5e = {
     }
 }
 
-export class CharacterDataHandler{
+// export class CharacterDataHandler{
 
-    characterData:any;
+//     characterData:any;
 
-    constructor(characterData:any){
-        this.characterData = characterData;
-    }
+//     constructor(characterData:any){
+//         this.characterData = characterData;
+//     }
 
-    deleteCounter(key:string){
-        console.log("deleteing counter ", key);
-        delete this.characterData.counters[key];
-    }
+//     deleteCounter(key:string){
+//         console.log("deleteing counter ", key);
+//         delete this.characterData.counters[key];
+//     }
 
-    deleteComposite(key:string){
-        delete this.characterData.composites[key];
-    }
+//     deleteComposite(key:string){
+//         delete this.characterData.composites[key];
+//     }
 
-    deleteRoll(key:string){
-        delete this.characterData.rolls[key];
-    }
+//     deleteRoll(key:string){
+//         delete this.characterData.rolls[key];
+//     }
 
-    addCounter(key:string, data:any){
-        console.log("adding counter ", key, data);
-        this.characterData.counters[key] = data;
-    }
+//     addCounter(key:string, data:any){
+//         console.log("adding counter ", key, data);
+//         this.characterData.counters[key] = data;
+//     }
 
-    addComposite(key:string, data:any){
-        this.characterData.composites[key] = data;
-    }
+//     addComposite(key:string, data:any){
+//         this.characterData.composites[key] = data;
+//     }
 
-    addRoll(key:string, data:string){
-        this.characterData.rolls[key] = data;
-    }
+//     addRoll(key:string, data:string){
+//         this.characterData.rolls[key] = data;
+//     }
 
-    getCounter(key:string){
-        return this.characterData.counters[key];
-    }
+//     getCounter(key:string){
+//         return this.characterData.counters[key];
+//     }
 
-    getRoll(key:string){
-        return this.characterData.rolls[key];
-    }
+//     getRoll(key:string){
+//         return this.characterData.rolls[key];
+//     }
 
-    getComposite(key:string){
-        return this.characterData.composites[key];
-    }
-}
+//     getComposite(key:string){
+//         return this.characterData.composites[key];
+//     }
+// }
