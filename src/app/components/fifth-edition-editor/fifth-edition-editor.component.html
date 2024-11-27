@@ -1,0 +1,57 @@
+<div>
+    Level: <input type="number" max="20" min="1" value="1" >
+</div>
+<div>
+    Armor Class: <input type="number" max="100" min="0" value="10">
+</div>
+<div>
+    Spell Casting Ability: 
+    <select name="spellSelect" id="spell-select">
+        <option value="">--Please choose an option--</option>
+        <option value="int">intelligence</option>
+        <option value="wis">wisdom</option>
+        <option value="cha">charisma</option>
+    </select>
+</div>
+
+<h2>Attributes</h2>
+<div class="attribute-group">
+    <app-attribute
+        [characterHandler]="_characterHandler"
+        attributeName="strength"
+        [skills]="['athletics']"
+    ></app-attribute>
+
+    <app-attribute
+        [characterHandler]="_characterHandler"
+        attributeName="dexterity"
+        [skills]="['acrobatics', 'sleight_of_hand', 'stealth']"
+    ></app-attribute>
+
+    <app-attribute
+        [characterHandler]="_characterHandler"
+        attributeName="constitution"
+        [skills]="[]"
+    ></app-attribute>
+
+        <app-attribute
+        [characterHandler]="_characterHandler"
+        attributeName="intelligence"
+        [skills]="['arcana', 'history', 'investigation', 'nature', 'religion']"
+    ></app-attribute>
+
+    <app-attribute
+        [characterHandler]="_characterHandler"
+        attributeName="wisdom"
+        [skills]="['animal_handling', 'insight', 'medicine', 'perception', 'survival']"
+    ></app-attribute>
+
+    <app-attribute
+        [characterHandler]="_characterHandler"
+        attributeName="charisma"
+        [skills]="['deception', 'intimidation', 'performance', 'persuasion']"
+    ></app-attribute>
+</div>
+
+<h2>Tools</h2>
+<div></div>

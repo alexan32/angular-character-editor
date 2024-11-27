@@ -11,6 +11,7 @@ import { CompositeEditorComponent } from '../widgets/composite/composite-editor/
 import { CharacterOverviewComponent } from '../widgets/character/character-overview/character-overview.component';
 import { characterMin, dnd5e } from '../../models/characterTemplates';
 import { MatTooltip, TooltipPosition} from '@angular/material/tooltip';
+import { FifthEditionEditorComponent } from '../fifth-edition-editor/fifth-edition-editor.component';
 
 @Component({
   selector: 'app-character-editor',
@@ -25,7 +26,8 @@ import { MatTooltip, TooltipPosition} from '@angular/material/tooltip';
     RollEditorComponent,
     CompositeEditorComponent,
     CharacterOverviewComponent,
-    MatTooltip
+    MatTooltip,
+    FifthEditionEditorComponent
   ],
   templateUrl: './character-editor.component.html',
   styleUrl: './character-editor.component.scss'
@@ -34,6 +36,7 @@ export class CharacterEditorComponent {
 
   // characterData
   templateSelected:boolean = false;
+  templateName:string|null = null;
   characterHandler: CharacterDataHandler;
   _characterData: any = characterMin;
   tableData: any = {
@@ -67,9 +70,11 @@ export class CharacterEditorComponent {
   compositeName: string = "";
   compositeData: any = {};
 
+  // fifth edition sheet view
+  showFifthEditionEditor: boolean = false;
+
   matTabIndex: number | null = 0;
-  
-  //
+
 
   constructor(){
     this.characterHandler = new CharacterDataHandler(this._characterData);
@@ -99,6 +104,7 @@ export class CharacterEditorComponent {
   }
 
   loadTemplate(template:string){
+    this.templateName = template;
     if(template == "5e"){
       this.resetCharacterData(dnd5e)
     }else if(template == "characterMin"){
@@ -269,6 +275,11 @@ export class CharacterEditorComponent {
     this._characterData = JSON.parse(this.characterJson);
   }
 
+  selectFifthEditionEditor(){
+    this.resetEditors();
+    this.showFifthEditionEditor = true;
+  }
+
   resetEditors(){
     // counter editor
     this.showCounterEditor = false;
@@ -284,6 +295,8 @@ export class CharacterEditorComponent {
     this.showCompositeEditor = false;
     this.compositeName = "";
     this.compositeData = {};
+
+    this.showFifthEditionEditor = false;
   }
 
   validateFirstName(){

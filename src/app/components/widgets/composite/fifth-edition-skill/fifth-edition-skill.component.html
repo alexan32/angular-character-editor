@@ -1,0 +1,6 @@
+<div class="box">
+    <mat-icon *ngIf="state == '0'" (click)="toggle()">radio_button_unchecked</mat-icon>
+    <mat-icon *ngIf="state == 'prof'" (click)="toggle()">radio_button_checked</mat-icon>
+    <mat-icon *ngIf="state == 'expert'" (click)="toggle()">star</mat-icon>
+    <div>{{skillName}}</div>
+</div>

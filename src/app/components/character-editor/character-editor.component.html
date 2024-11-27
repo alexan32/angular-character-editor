@@ -7,7 +7,7 @@
             <mat-tab label="Choose Template">
                 
                 <div class="column">
-                    <button mat-raised-button color="primary" (click)="loadFromFile()" matTooltip="Upload a pre-existing character" matTooltipPosition="right">Load From File</button>
+                    <button mat-raised-button color="primary" (click)="loadFromFile();" matTooltip="Upload a pre-existing character" matTooltipPosition="right">Load From File</button>
                     <button mat-raised-button color="primary" (click)="loadTemplate('5e')">Dnd 5e Template</button>
                     <button mat-raised-button color="primary" (click)="loadTemplate('characterMin')">Blank Template</button>
                 </div>
@@ -15,12 +15,13 @@
             </mat-tab>
 
             <!-- DATA EDITOR TAB -->
-            <mat-tab label="Counters and Rolls" [disabled]="!templateSelected">
+            <mat-tab label="Edit Rolls" [disabled]="!templateSelected">
 
-                <div *ngIf="!showCompositeEditor && !showRollEditor && !showCounterEditor" class="button-row">
+                <div *ngIf="!showCompositeEditor && !showRollEditor && !showCounterEditor && !showFifthEditionEditor" class="button-row">
                     <button mat-raised-button color="primary" (click)="newComposite()">Add Composite</button>
-                    <button *ngIf="!showCounterEditor;" mat-raised-button color="primary" (click)="newCounter()">Add Counter</button>
+                    <button mat-raised-button color="primary" (click)="newCounter()">Add Counter</button>
                     <button mat-raised-button color="primary" (click)="newRoll()">Add Roll</button>
+                    <button *ngIf="templateName == '5e'" mat-raised-button color="primary" (click)="selectFifthEditionEditor()">5e Editor</button>
                 </div>
         
                 <ng-container *ngIf="showCounterEditor;">
@@ -49,6 +50,11 @@
                         (dataChange)="compositeEditorEvent($event)">
                     </app-composite-editor>
                 </ng-container>
+
+                <ng-container *ngIf="showFifthEditionEditor">
+                    <app-fifth-edition-editor></app-fifth-edition-editor>
+                </ng-container>
+
             </mat-tab>
 
             <!-- <mat-tab label="Functions"></mat-tab>

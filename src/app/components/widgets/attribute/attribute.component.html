@@ -1,0 +1,23 @@
+<div class="attribute-container">
+    <app-counter-widget
+        [counterName]="attributeName"
+        [counterData]="counterData">
+    </app-counter-widget>
+
+    <!-- <div class="spacer"></div> -->
+
+    <app-fifth-edition-skill 
+        [characterHandler]="_characterHandler"
+        [skillName]="attributeName + '_save'">
+    </app-fifth-edition-skill>
+
+    <div class="spacer"></div>
+
+    <ng-container *ngFor="let skill of _skills;">
+        <app-fifth-edition-skill 
+            [characterHandler]="_characterHandler"
+            [skillName]="skill">
+        </app-fifth-edition-skill>
+    </ng-container>
+
+</div>
