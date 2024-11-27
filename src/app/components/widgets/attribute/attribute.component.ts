@@ -1,7 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CounterWidgetComponent } from '../counter/counter-widget/counter-widget.component';
 import { FifthEditionSkillComponent } from "../composite/fifth-edition-skill/fifth-edition-skill.component";
+import { CharacterService } from '../../../services/character.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-attribute',
@@ -14,17 +16,21 @@ import { FifthEditionSkillComponent } from "../composite/fifth-edition-skill/fif
   templateUrl: './attribute.component.html',
   styleUrl: './attribute.component.scss'
 })
-export class AttributeComponent {
+export class AttributeComponent implements OnInit, OnDestroy {
 
   counterData = {
     max: 20,
     min: 0,
     total: 8
   }
-  _characterData: any = {};
-  _characterHandler: any = {};
-  @Input() set characterHandler(characterHandler:any){
-    this._characterHandler = characterHandler;
+
+  modifierMap:any = {
+    "strength": "str",
+    "dexterity": "dex",
+    "constitution": "con",
+    "intelligence": "int",
+    "wisdom": "wis",
+    "charisma": "cha"
   }
 
   @Input() attributeName:string = "";
@@ -33,5 +39,39 @@ export class AttributeComponent {
   @Input() set skills(skillList:Array<string>){
     this._skills = skillList;
   }
+
+  characterData: any;
+  characterDataSubscription:Subscription;
+
+  constructor(private characterService:CharacterService){}
+
+  ngOnInit(): void {
+    this.characterDataSubscription = this.characterService.getCharacterObservable().subscribe((value:any)=>this.updateLocalVariables(value));
+  }
+
+  ngOnDestroy(): void {
+    if(this.characterDataSubscription){
+      this.characterDataSubscription.unsubscribe();
+    }
+  }
+
+  updateLocalVariables(value:any){
+    this.characterData = value;
+  }
+
+  updateAttribute(event:any){
+    this.characterService.characterHandler.addCounter(event.counterName, event.counterData);
+  }
+
+  updateComposite(name:string, event:any){
+    const composite = {
+      "base": "1d20",
+      "modifier": this.modifierMap[this.attributeName],
+      "proficiency": event.proficiencyLevel,
+      "bonus": "0"
+    }
+    this.characterService.characterHandler.addComposite(name, composite);
+  }
+
 
 }

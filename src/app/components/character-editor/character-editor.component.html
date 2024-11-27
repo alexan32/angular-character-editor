@@ -16,62 +16,22 @@
 
             <!-- DATA EDITOR TAB -->
             <mat-tab label="Edit Rolls" [disabled]="!templateSelected">
-
                 <app-editor-tab></app-editor-tab>
-
-                <!-- <div *ngIf="!showCompositeEditor && !showRollEditor && !showCounterEditor && !showFifthEditionEditor" class="button-row">
-                    <button mat-raised-button color="primary" (click)="newComposite()">Add Composite</button>
-                    <button mat-raised-button color="primary" (click)="newCounter()">Add Counter</button>
-                    <button mat-raised-button color="primary" (click)="newRoll()">Add Roll</button>
-                    <button *ngIf="templateName == '5e'" mat-raised-button color="primary" (click)="selectFifthEditionEditor()">5e Editor</button>
-                </div>
-        
-                <ng-container *ngIf="showCounterEditor;">
-                    <h4>Counter Editor</h4>
-                    <app-counter-editor 
-                        [counterName]="counterName"
-                        [counterData]="counterData"
-                        (dataChange)="counterEditorEvent($event)">
-                    </app-counter-editor>
-                </ng-container>
-                
-                <ng-container *ngIf="showRollEditor">
-                    <h4>Roll Editor</h4>
-                    <app-roll-editor 
-                        [rollName]="rollName"
-                        [rollData]="rollData"
-                        (dataChange)="rollEditorEvent($event)">
-                    </app-roll-editor>
-                </ng-container>
-        
-                <ng-container  *ngIf="showCompositeEditor">
-                    <h4>Composite Editor</h4>
-                    <app-composite-editor
-                        [compositeName]="compositeName"
-                        [compositeData]="compositeData"
-                        (dataChange)="compositeEditorEvent($event)">
-                    </app-composite-editor>
-                </ng-container>
-
-                <ng-container *ngIf="showFifthEditionEditor">
-                    <app-fifth-edition-editor></app-fifth-edition-editor>
-                </ng-container> -->
-
             </mat-tab>
 
             <mat-tab label="Review" [disabled]="!templateSelected">
                 <table>
-                    <!-- <tr>
+                    <tr>
                         <td>First Name:</td>
-                        <td><input type="text" [(ngModel)]="characterHandler.characterData.first"></td>
+                        <td><input type="text" [(ngModel)]="first" (ngModelChange)="updateCharacterName();"></td>
                     </tr>
                     <tr>
                         <td>Last Name:</td>
-                        <td><input type="text" [(ngModel)]="characterHandler.characterData.last"></td>
-                    </tr> -->
+                        <td><input type="text" [(ngModel)]="last" (ngModelChange)="updateCharacterName();"></td>
+                    </tr>
                 </table>
-                <p *ngIf="!validateFirstName()">First name is required and must be unique.</p>
-                <button mat-raised-button color="primary" (click)="downloadCharacter()">Download Character</button>
+                <button mat-raised-button color="primary" (click)="downloadCharacter()" [disabled]="!nameValid">Download Character</button>
+                <p *ngIf="!nameValid">First and last name is required.</p>
             </mat-tab>
             
         </mat-tab-group>

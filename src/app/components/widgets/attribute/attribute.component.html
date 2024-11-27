@@ -1,22 +1,24 @@
 <div class="attribute-container">
     <app-counter-widget
         [counterName]="attributeName"
-        [counterData]="counterData">
+        [counterData]="counterData"
+        (dataChange)="updateAttribute($event)"
+        >
     </app-counter-widget>
 
     <!-- <div class="spacer"></div> -->
 
     <app-fifth-edition-skill 
-        [characterHandler]="_characterHandler"
-        [skillName]="attributeName + '_save'">
+        [skillName]="attributeName + '_save'"
+        (dataChange)="updateComposite(attributeName + '_save', $event)">
     </app-fifth-edition-skill>
 
     <div class="spacer"></div>
 
     <ng-container *ngFor="let skill of _skills;">
         <app-fifth-edition-skill 
-            [characterHandler]="_characterHandler"
-            [skillName]="skill">
+            [skillName]="skill"
+            (dataChange)="updateComposite(skill, $event)">
         </app-fifth-edition-skill>
     </ng-container>
 

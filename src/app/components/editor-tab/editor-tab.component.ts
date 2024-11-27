@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CounterEditorComponent } from '../widgets/counter/counter-editor/counter-editor.component';
 import { RollEditorComponent } from '../widgets/roll-editor/roll-editor.component';
 import { CompositeEditorComponent } from '../widgets/composite/composite-editor/composite-editor.component';
-// import { FifthEditionEditorComponent } from '../fifth-edition-editor/fifth-edition-editor.component';
+import { FifthEditionEditorComponent } from '../fifth-edition-editor/fifth-edition-editor.component';
 import { CharacterService } from '../../services/character.service';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
@@ -16,7 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
     CounterEditorComponent,
     RollEditorComponent,
     CompositeEditorComponent,
-    // FifthEditionEditorComponent
+    FifthEditionEditorComponent
   ],
   templateUrl: './editor-tab.component.html',
   styleUrl: './editor-tab.component.scss'
@@ -56,6 +56,8 @@ export class EditorTabComponent implements OnInit, OnDestroy {
     this.characterEventSubscription = this.characterService.characterEvent.subscribe((event:any)=>{
       if(event.name == "roll_selected"){
         this.handleRollSelect(event);
+      }else if(event.name == "reset_editors"){
+        this.resetEditors();
       }
     });
   }
@@ -122,6 +124,11 @@ export class EditorTabComponent implements OnInit, OnDestroy {
     this.compositeName = "";
     this.compositeData = {}; 
 
+  }
+
+  selectFifthEditionEditor(){
+    this.resetEditors();
+    this.showFifthEditionEditor = true;
   }
 
   compositeEditorEvent(event:any){

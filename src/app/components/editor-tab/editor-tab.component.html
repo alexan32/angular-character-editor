@@ -2,7 +2,7 @@
     <button mat-raised-button color="primary" (click)="newComposite()">Add Composite</button>
     <button mat-raised-button color="primary" (click)="newCounter()">Add Counter</button>
     <button mat-raised-button color="primary" (click)="newRoll()">Add Roll</button>
-    <!-- <button *ngIf="templateName == '5e'" mat-raised-button color="primary" (click)="selectFifthEditionEditor()">5e Editor</button> -->
+    <button mat-raised-button color="primary" (click)="selectFifthEditionEditor()">5e Editor</button>
 </div>
 
 <ng-container *ngIf="showCounterEditor;">
@@ -32,6 +32,6 @@
     </app-composite-editor>
 </ng-container>
 
-<!-- <ng-container *ngIf="showFifthEditionEditor">
+<ng-container *ngIf="showFifthEditionEditor">
     <app-fifth-edition-editor></app-fifth-edition-editor>
-</ng-container> -->
+</ng-container>

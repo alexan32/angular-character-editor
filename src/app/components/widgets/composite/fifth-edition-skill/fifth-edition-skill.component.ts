@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -21,6 +21,8 @@ export class FifthEditionSkillComponent {
 
   @Input() skillName:string = "";
 
+  @Output() dataChange: EventEmitter<any> = new EventEmitter<any>();
+
 
   toggle(){
     switch (this.state){
@@ -36,6 +38,10 @@ export class FifthEditionSkillComponent {
       default:
         this.state = "0";
     }
+    this.dataChange.emit({
+      "name": this.skillName,
+      "proficiencyLevel": this.state
+    })
   }
 
 }
