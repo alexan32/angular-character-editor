@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { characterMin, dnd5e } from '../models/characterTemplates';
 import { Observable, BehaviorSubject } from 'rxjs';
 
@@ -11,10 +11,15 @@ export class CharacterService {
   // object for handling character data
   characterHandler: CharacterDataHandler = new CharacterDataHandler(characterMin);
 
-  constructor() { }
+  private eventSubject: BehaviorSubject<any> = new BehaviorSubject<any>({});
+  characterEvent: Observable<any> = this.eventSubject.asObservable()
 
   getCharacterObservable(){
     return this.characterHandler.characterData$;
+  }
+
+  publishCharacterEvent(event:any){
+    this.eventSubject.next(event);
   }
 
 }

@@ -83,7 +83,14 @@ export class CharacterOverviewComponent implements OnInit, OnDestroy{
   }
 
   editRow(type:string, value:any){
-    this.rowSelect.emit({"type": type, "value": value});
+    // this.rowSelect.emit({"type": type, "value": value});
+    this.characterService.publishCharacterEvent({
+      name: "roll_selected",
+      payload: {
+        roll_type: type,
+        value: value
+      }
+    })
   }
 
 }

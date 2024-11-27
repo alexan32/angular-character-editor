@@ -42,6 +42,7 @@ export class EditorTabComponent implements OnInit, OnDestroy {
   showFifthEditionEditor:boolean = false;
 
   //character 
+  private characterEventSubscription:Subscription;
   private characterDataSubscription:Subscription;
   characterData:any;
 
@@ -50,13 +51,70 @@ export class EditorTabComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.characterDataSubscription = this.characterService.getCharacterObservable().subscribe((value:any)=>{
       this.characterData = value;
-    })
+    });
+
+    this.characterEventSubscription = this.characterService.characterEvent.subscribe((event:any)=>{
+      if(event.name == "roll_selected"){
+        this.handleRollSelect(event);
+      }
+    });
   }
 
   ngOnDestroy(): void {
     if(this.characterDataSubscription){
       this.characterDataSubscription.unsubscribe();
     }
+    if(this.characterEventSubscription){
+      this.characterEventSubscription.unsubscribe();
+    }
+  }
+
+  handleRollSelect(event:any){
+    console.log("roll select event: ", event);
+    const payload = event.payload;
+    this.resetEditors();
+    switch(payload.roll_type){
+      case "roll":
+        console.log("edit roll!");
+        this.rollName = payload.value.name;
+        this.rollData = this.characterService.characterHandler.getRoll(this.rollName);
+        this.showRollEditor = true;
+        break;
+      case "composite":
+        console.log("edit composite!");
+        this.compositeName = payload.value.name;
+        this.compositeData = this.characterService.characterHandler.getComposite(this.compositeName);
+        this.showCompositeEditor = true;
+        break;
+      case "counter":
+        console.log("edit counter!");
+        this.counterName = payload.value.name;
+        this.counterData = this.characterService.characterHandler.getCounter(this.counterName);
+        this.showCounterEditor = true;
+        break;
+      default:
+        console.warn("unknown roll type: ", payload.roll_type);
+        break;
+    }
+  }
+
+  resetEditors(){
+    // counter editor
+    this.showCounterEditor = false;
+    this.counterName = "";
+    this.counterData = {max: 10, min:0, total: 10};
+
+    // roll editor
+    this.showRollEditor = false;
+    this.rollName = "";
+    this.rollData = "";
+
+    // composite editor
+    this.showCompositeEditor = false;
+    this.compositeName = "";
+    this.compositeData = {};
+
+    this.showFifthEditionEditor = false;
   }
 
   newComposite(){
