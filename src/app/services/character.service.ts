@@ -72,6 +72,9 @@ class CharacterDataHandler{
 
   addCounter(key:string, data:any){
     console.log("adding counter ", key, data);
+    data["max"] = String(data["max"]);
+    data["min"] = String(data["min"]);
+    data["total"] = String(data["total"]);
     this.characterData.counters[key] = data;
     this.characterDataSubject.next(this.characterData);
   }
