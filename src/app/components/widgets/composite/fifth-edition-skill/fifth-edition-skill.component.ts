@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { CharacterService } from '../../../../services/character.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-fifth-edition-skill',
@@ -23,6 +25,27 @@ export class FifthEditionSkillComponent {
 
   @Output() dataChange: EventEmitter<any> = new EventEmitter<any>();
 
+  characterData: any;
+  characterDataSubscription:Subscription;
+
+  constructor(private characterService:CharacterService){}
+
+  ngOnInit(): void {
+    this.characterDataSubscription = this.characterService.getCharacterObservable().subscribe((value:any)=>{
+      this.characterData = value;
+      let composites = this.characterData?.composites;
+      if(composites.hasOwnProperty(this.skillName)){
+        let skill = composites[this.skillName];
+        this.state = skill?.proficiency || this.state;
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    if(this.characterDataSubscription){
+      this.characterDataSubscription.unsubscribe();
+    }
+  }
 
   toggle(){
     switch (this.state){

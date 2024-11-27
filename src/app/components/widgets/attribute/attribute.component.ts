@@ -33,7 +33,11 @@ export class AttributeComponent implements OnInit, OnDestroy {
     "charisma": "cha"
   }
 
-  @Input() attributeName:string = "";
+  _attributeName: string = "";
+  @Input() set attributeName(value:string){
+    this._attributeName = value;
+  }
+
   
   _skills:Array<string> = [];
   @Input() set skills(skillList:Array<string>){
@@ -57,16 +61,21 @@ export class AttributeComponent implements OnInit, OnDestroy {
 
   updateLocalVariables(value:any){
     this.characterData = value;
+    let counters = this.characterData?.counters || {};
+    if(counters.hasOwnProperty(this._attributeName)){
+      this.counterData = counters[this._attributeName];
+    }
   }
 
   updateAttribute(event:any){
+    console.log("update character attribute: ", this._attributeName)
     this.characterService.characterHandler.addCounter(event.counterName, event.counterData);
   }
 
   updateComposite(name:string, event:any){
     const composite = {
       "base": "1d20",
-      "modifier": this.modifierMap[this.attributeName],
+      "modifier": this.modifierMap[this._attributeName],
       "proficiency": event.proficiencyLevel,
       "bonus": "0"
     }

@@ -33,7 +33,6 @@ export class CharacterEditorComponent implements OnInit, OnDestroy{
 
   matTabIndex: number | null = 0;
 
-  
   first:string = "";
   last:string = "";
   nameValid:boolean = false;
@@ -48,7 +47,8 @@ export class CharacterEditorComponent implements OnInit, OnDestroy{
       this.characterData = value;
       this.first = this.characterData?.first;
       this.last = this.characterData?.last;
-    })
+      this.nameValid = (/^[a-z0-9]+$/i.test(this.first) && /^[a-z0-9]+$/i.test(this.last))
+    });
   }
 
   ngOnDestroy(): void {

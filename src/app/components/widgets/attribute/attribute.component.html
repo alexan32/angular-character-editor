@@ -1,6 +1,6 @@
 <div class="attribute-container">
     <app-counter-widget
-        [counterName]="attributeName"
+        [counterName]="_attributeName"
         [counterData]="counterData"
         (dataChange)="updateAttribute($event)"
         >
@@ -9,8 +9,8 @@
     <!-- <div class="spacer"></div> -->
 
     <app-fifth-edition-skill 
-        [skillName]="attributeName + '_save'"
-        (dataChange)="updateComposite(attributeName + '_save', $event)">
+        [skillName]="_attributeName + '_save'"
+        (dataChange)="updateComposite(_attributeName + '_save', $event)">
     </app-fifth-edition-skill>
 
     <div class="spacer"></div>
