@@ -292,7 +292,8 @@ export const dnd5e = {
         "acrobatics": {
             "base": "1d20",
             "modifier": "dex",
-            "proficiency": "prof"
+            "proficiency": "0",
+            "bonus": "0"
         },
         "spell_attack": {
             "base": "1d20",

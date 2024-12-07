@@ -69,7 +69,7 @@ export class AttributeComponent implements OnInit, OnDestroy {
 
   updateAttribute(event:any){
     console.log("update character attribute: ", this._attributeName)
-    this.characterService.characterHandler.addCounter(event.counterName, event.counterData);
+    this.characterService.characterHandler.addCounter(`${event.counterName}_attribute`, event.counterData);
   }
 
   updateComposite(name:string, event:any){
